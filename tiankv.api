@@ -6,7 +6,41 @@ type Response {
 	Message string `json:"message"`
 }
 
+type (
+	AddKeyReq {
+		Name  string `path:"name,options=you|me"`
+		Value string `json:"value"`
+	}
+
+	AddKeyResp {
+	}
+
+	DeleteKeyReq {
+		Name string `path:"name,options=you|me"`
+	}
+
+	DeleteKeyResp {
+	}
+
+	GetKeyReq {
+		Name string `path:"name,options=you|me"`
+	}
+
+	GetKeyResp {
+		Value string `json:"value"`
+	}
+)
+
 service tiankv-api {
 	@handler TiankvHandler
-	get /from/:name(Request) returns (Response);
+	get /from/:name (Request) returns (Response);
+	
+	@handler AddKeyHandler
+	post /key/:name (AddKeyReq) returns (AddKeyResp);
+	
+	@handler DeleteKeyHandler
+	delete /key/:name (DeleteKeyReq) returns (DeleteKeyResp);
+	
+	@handler GetKeyHandler
+	get /key/:name (GetKeyReq) returns (GetKeyResp);
 }

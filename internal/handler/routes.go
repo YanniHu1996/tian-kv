@@ -3,18 +3,34 @@ package handler
 
 import (
 	"net/http"
-	svc2 "tian-kv/internal/svc"
+
+	"tian-kv/internal/svc"
 
 	"github.com/tal-tech/go-zero/rest"
 )
 
-func RegisterHandlers(engine *rest.Server, serverCtx *svc2.ServiceContext) {
+func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 	engine.AddRoutes(
 		[]rest.Route{
 			{
 				Method:  http.MethodGet,
 				Path:    "/from/:name",
 				Handler: TiankvHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/key/:name",
+				Handler: AddKeyHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodDelete,
+				Path:    "/key/:name",
+				Handler: DeleteKeyHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodGet,
+				Path:    "/key/:name",
+				Handler: GetKeyHandler(serverCtx),
 			},
 		},
 	)

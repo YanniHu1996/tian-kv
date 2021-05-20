@@ -8,3 +8,26 @@ type Request struct {
 type Response struct {
 	Message string `json:"message"`
 }
+
+type AddKeyReq struct {
+	Name  string `path:"name,options=you|me"`
+	Value string `json:"value"`
+}
+
+type AddKeyResp struct {
+}
+
+type DeleteKeyReq struct {
+	Name string `path:"name,options=you|me"`
+}
+
+type DeleteKeyResp struct {
+}
+
+type GetKeyReq struct {
+	Name string `path:"name,options=you|me"`
+}
+
+type GetKeyResp struct {
+	Value string `json:"value"`
+}
